@@ -1,11 +1,22 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import apiHandler from '@/lib/utils/apiHandler';
+import UserService from '@/services/user';
+import { User } from '@/types';
 
 export default apiHandler({
-    GET: (req: NextApiRequest, res: NextApiResponse) => {
-        res.status(200).json({ message: "Obteniendo usuarios" });
+    GET: async (req: NextApiRequest, res: NextApiResponse) => {
+        const users = await UserService.list();
+        res.status(200).json({ data: users });
     },
-    POST: (req: NextApiRequest, res: NextApiResponse) => {
-        res.status(201).json({ message: "Usuario creado" });
+    POST: async (req: NextApiRequest, res: NextApiResponse) => {
+        const newUser: User = {
+            firstName: req.body.first_name,
+            lastName: req.body.last_name,
+            age: req.body.age,
+            gender: req.body.gender,
+            pokemon: req.body.pokemon
+        };
+        await UserService.create(newUser);
+        res.status(204).send();
     },
 });
