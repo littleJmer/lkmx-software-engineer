@@ -1,5 +1,5 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require("@/server/db");
+import { DataTypes } from "sequelize";
+import sequelize from "../db";
 
 const User = sequelize.define('users', {
     firstName: DataTypes.TEXT,
@@ -8,7 +8,5 @@ const User = sequelize.define('users', {
     gender: DataTypes.ENUM("Masculino", "Femenino"),
     pokemon: DataTypes.ENUM("Bulbasaur", "Charmander", "Squirtle")
 });
-
-User.sync({ force: false, alter: true });
 
 export default User;

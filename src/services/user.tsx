@@ -1,7 +1,7 @@
 import UserModel from "@/server/models/user";
 import { User } from "@/types";
 
-export default {
+const userService = {
 
     list: async () => {
         const users = await UserModel.findAll();
@@ -9,14 +9,15 @@ export default {
     },
 
     create: async (newUser: User) => {
-        const userCreated = await UserModel.create({
+        await UserModel.create({
             firstName: newUser.firstName,
             lastName: newUser.lastName,
             age: newUser.age,
             gender: newUser.gender,
             pokemon: newUser.pokemon
         });
-        return userCreated.id;
     }
 
 };
+
+export default userService;

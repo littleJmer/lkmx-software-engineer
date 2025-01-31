@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default (handlers: { [key: string]: Function }) => {
+const apiHandler = (handlers: { [key: string]: (req: NextApiRequest, res: NextApiResponse) => void }) => {
     return async (req: NextApiRequest, res: NextApiResponse) => {
         const methodHandler = handlers[req.method as keyof typeof handlers];
 
@@ -10,4 +10,6 @@ export default (handlers: { [key: string]: Function }) => {
 
         return await methodHandler(req, res);
     };
-}
+};
+
+export default apiHandler;

@@ -17,6 +17,6 @@ export default apiHandler({
             pokemon: req.body.pokemon
         };
         await UserService.create(newUser);
-        res.status(204).send();
+        res.status(204);
     },
 });

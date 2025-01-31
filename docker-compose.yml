@@ -1,0 +1,24 @@
+services:
+
+  app:
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=prod_lkmx
+      - DB_USER=prod_user
+      - DB_PASS=prod_password
+
+  postgres:
+    image: postgres:14-alpine
+    # INTERNAL ACCESS
+    # ports:
+    #   - 5432:5432
+    volumes:
+      - ./volumes/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=prod_password
+      - POSTGRES_USER=prod_user
+      - POSTGRES_DB=prod_lkmx

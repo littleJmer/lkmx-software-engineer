@@ -1,9 +1,23 @@
 'use client'
 
+import { User } from '@/types';
 import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react';
 
 export default function Home() {
-  const router = useRouter()
+
+  const [users, setUsers] = useState<User[]>([]);
+
+  const router = useRouter();
+
+  useEffect(() => loadData(), []);
+
+  const loadData = () => {
+    fetch("/api/users", { method: "GET" })
+      .then(async response => await response.json())
+      .then(({ data }) => setUsers(data))
+      .catch(error => console.error(error))
+  };
 
   return (
     <div className="m-auto w-full max-w-4xl bg-white p-6 rounded-lg shadow-md">
@@ -21,13 +35,17 @@ export default function Home() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="border border-gray-300 px-4 py-2">Ejemplo</td>
-            <td className="border border-gray-300 px-4 py-2">Usuario</td>
-            <td className="border border-gray-300 px-4 py-2">25</td>
-            <td className="border border-gray-300 px-4 py-2">Masculino</td>
-            <td className="border border-gray-300 px-4 py-2">Pikachu</td>
-          </tr>
+          {users?.map((user, key) => {
+            return (
+              <tr key={`key-${key}`}>
+                <td className="border border-gray-300 px-4 py-2">{user.firstName}</td>
+                <td className="border border-gray-300 px-4 py-2">{user.lastName}</td>
+                <td className="border border-gray-300 px-4 py-2">{user.age}</td>
+                <td className="border border-gray-300 px-4 py-2">{user.gender}</td>
+                <td className="border border-gray-300 px-4 py-2">{user.pokemon}</td>
+              </tr>
+            )
+          })}
         </tbody>
       </table>
     </div>

@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize');
+import { Sequelize } from "sequelize";
 
 const db_host = process.env.DB_HOST;
 const db_port = process.env.DB_PORT;
@@ -11,11 +11,12 @@ const sequelize = new Sequelize(`postgres://${db_user}:${db_pass}@${db_host}:${d
 async function testConnection() {
     try {
         await sequelize.authenticate();
+        await sequelize.sync({ force: false, alter: true });
         console.log('Connection has been established successfully.');
     } catch (error) {
         console.error('Unable to connect to the database:', error);
     }
 }; testConnection();
 
-module.exports = sequelize;
+export default sequelize
 

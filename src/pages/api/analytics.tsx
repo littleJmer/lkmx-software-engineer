@@ -1,14 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { HealthCheckResponse } from '@/types'
+import analytics from '@/services/analytics'
+import { PokemonAnalytics } from '@/types';
 
-export default function handler(
+export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<HealthCheckResponse>
+    res: NextApiResponse<PokemonAnalytics>
 ) {
-    res.status(200).json({
-        "status": "ok",
-        "uptime": 3600,
-        "message": "API funcionando correctamente",
-        "timestamp": "2025-01-29T12:34:56Z"
-    })
+    const pokemons = await analytics.pokemons();
+    const pokemonAnalytics: PokemonAnalytics = { data: pokemons };
+    res.status(200).json(pokemonAnalytics)
 }
