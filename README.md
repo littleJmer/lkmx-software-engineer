@@ -40,6 +40,14 @@ Este script iniciará los contenedores de PostgreSQL y Next.js utilizando Docker
 http://localhost:3000
 ```
 
+## Endpoints de interes
+
+Muestra la salud del servicio
+
+```sh
+http://localhost:3000/api/health
+```
+
 ## Problemas enfrentados y lecciones aprendidas
 Despues de estar trabajando mucho tiempo en el backend, volver al frontend me parece gratificante y mas con Next.js la cual es mi primier acercamiento. Me sorprendio saber que Next.js permite el desarrollo de sistemas en una arquitectura monolitica por otro lado me causa bastante conflicto el enrutamiento en base al directorio, por ultimo durante el desarrollo de este proyecto, me encontré con varios desafíos:
 
