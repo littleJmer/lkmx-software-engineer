@@ -34,7 +34,11 @@ Una vez dentro del directorio del proyecto, ejecuta el siguiente script:
 sh init.sh
 ```
 
-Este script iniciará los contenedores de PostgreSQL y Next.js utilizando Docker Compose.
+Este script iniciará los contenedores de PostgreSQL y Next.js utilizando Docker Compose. Una vez los contenedores esten inicializados podras accedar al sistema atravez de la siguiente url.
+
+```sh
+http://localhost:3000
+```
 
 ## Problemas enfrentados y lecciones aprendidas
 Despues de estar trabajando mucho tiempo en el backend, volver al frontend me parece gratificante y mas con Next.js la cual es mi primier acercamiento. Me sorprendio saber que Next.js permite el desarrollo de sistemas en una arquitectura monolitica por otro lado me causa bastante conflicto el enrutamiento en base al directorio, por ultimo durante el desarrollo de este proyecto, me encontré con varios desafíos:
